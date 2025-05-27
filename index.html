@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebRTS - Real-Time Streaming Reimagined</title>
+    <title>WebRTS.org - Real-Time Streaming Revolution</title>
     <style>
         * {
             margin: 0;
@@ -12,168 +12,622 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8f9fa;
-            height: 100vh;
-            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .grid-background {
-            position: absolute;
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.3;
-            background-image: 
-                radial-gradient(circle at 20% 20%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%),
-                radial-gradient(circle at 40% 40%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%),
-                radial-gradient(circle at 60% 20%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%),
-                radial-gradient(circle at 80% 40%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%),
-                radial-gradient(circle at 20% 60%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%),
-                radial-gradient(circle at 40% 80%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%),
-                radial-gradient(circle at 60% 60%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%),
-                radial-gradient(circle at 80% 80%, transparent 15%, #6db4a4 15.5%, #6db4a4 16%, transparent 16.5%);
-            background-size: 200px 200px;
+            z-index: -1;
+            overflow: hidden;
         }
 
-        .curved-lines {
+        .bg-circle {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(ellipse 300px 150px at 25% 25%, transparent 40%, #6db4a4 41%, #6db4a4 42%, transparent 43%),
-                radial-gradient(ellipse 400px 200px at 75% 25%, transparent 40%, #6db4a4 41%, #6db4a4 42%, transparent 43%),
-                radial-gradient(ellipse 350px 175px at 25% 75%, transparent 40%, #6db4a4 41%, #6db4a4 42%, transparent 43%),
-                radial-gradient(ellipse 450px 225px at 75% 75%, transparent 40%, #6db4a4 41%, #6db4a4 42%, transparent 43%);
-            opacity: 0.2;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
         }
 
-        .text-container {
+        .bg-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: 10%;
+            animation-delay: 7s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
             position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            padding: 80px;
+            z-index: 100;
         }
 
-        .text-item {
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
             position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            width: 100%;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 900;
-            color: #000;
-            line-height: 0.9;
-            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
         }
 
-        .real-time {
-            top: 120px;
-            left: 80px;
-            font-size: clamp(3rem, 8vw, 7rem);
+        .hero .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 40px;
+            color: #cbd5e1;
+            font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .streaming {
-            top: 43%;
-            transform: translateY(-50%);
-            right: 80px;
-            font-size: clamp(3rem, 8vw, 7rem);
-        }
-
-        .reimagined {
-            bottom: 180px;
-            left: 80px;
-            font-size: clamp(3rem, 8vw, 7rem);
-        }
-
-        .webrts {
-            bottom: 80px;
-            right: 80px;
-            font-size: clamp(2rem, 5vw, 4rem);
+        .hero .tagline strong {
+            color: #3b82f6;
             font-weight: 700;
         }
 
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #ffffff, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            color: #cbd5e1;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .feature-card .highlight {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #cbd5e1;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3b82f6;
+        }
+
+        .copyright {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .text-container {
-                padding: 40px;
+            .nav-links {
+                display: none;
             }
             
-            .real-time {
-                top: 60px;
-                left: 40px;
-                font-size: clamp(2rem, 6vw, 4rem);
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
-
-            .streaming {
-                top: 43%;
-                transform: translateY(-50%);
-                right: 40px;
-                font-size: clamp(2rem, 6vw, 4rem);
+            
+            .feature-card {
+                padding: 30px;
             }
-
-            .reimagined {
-                bottom: 120px;
-                left: 40px;
-                font-size: clamp(2rem, 6vw, 4rem);
-            }
-
-            .webrts {
-                bottom: 40px;
-                right: 40px;
-                font-size: clamp(1.5rem, 4vw, 2.5rem);
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 480px) {
-            .text-container {
-                padding: 20px;
+            .hero {
+                min-height: 80vh;
             }
             
-            .real-time {
-                top: 40px;
-                left: 20px;
-                font-size: clamp(1.5rem, 5vw, 3rem);
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 16px;
             }
-
-            .streaming {
-                top: 43%;
-                transform: translateY(-50%);
-                right: 20px;
-                font-size: clamp(1.5rem, 5vw, 3rem);
-            }
-
-            .reimagined {
-                bottom: 80px;
-                left: 20px;
-                font-size: clamp(1.5rem, 5vw, 3rem);
-            }
-
-            .webrts {
-                bottom: 20px;
-                right: 20px;
-                font-size: clamp(1rem, 3vw, 2rem);
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="grid-background"></div>
-        <div class="curved-lines"></div>
-        
-        <div class="text-container">
-            <div class="text-item real-time">Real-Time</div>
-            <div class="text-item streaming">Streaming</div>
-            <div class="text-item reimagined">Reimagined</div>
-            <div class="text-item webrts">WebRTS.org</div>
-        </div>
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
     </div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">WebRTS.org</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#docs">Docs</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Real-Time Streaming<br>Revolution</h1>
+                    <p class="tagline">
+                        Uniting viewers from <strong>anywhere</strong> in the world in one shared moment
+                    </p>
+                    <a href="#features" class="cta-button">Discover WebRTS</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2>The Future of Live Streaming</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Sub-Second Latency</h3>
+                        <p>Experience <span class="highlight">real-time</span> streaming with unprecedented speed. No more delays, no more waiting - just instant, live connectivity that brings people together in the moment.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Universal Compatibility</h3>
+                        <p>No special players. No proprietary CDN. Just sub-second, secure, live video - <strong>Anywhere</strong>. Works seamlessly across all devices and platforms without additional software.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🔓</div>
+                        <h3>Open Solution</h3>
+                        <p>An <strong>open</strong> solution to compromises on latency and scale for <strong>real-time</strong> streaming. Built on open standards, ensuring transparency, flexibility, and community-driven innovation.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Enterprise Security</h3>
+                        <p>Military-grade encryption and security protocols ensure your streams are protected. Privacy-first architecture with end-to-end security for peace of mind.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📈</div>
+                        <h3>Infinite Scale</h3>
+                        <p>From intimate conversations to global broadcasts, WebRTS scales effortlessly. Handle millions of concurrent viewers without compromising on quality or latency.</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">⚙️</div>
+                        <h3>Developer Friendly</h3>
+                        <p>Simple APIs, comprehensive documentation, and robust SDKs make integration seamless. Build powerful real-time applications with minimal complexity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <h2>Trusted by Developers Worldwide</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">&lt;100ms</div>
+                        <div class="stat-label">Average Latency</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Concurrent Streams</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Countries Served</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#docs">Documentation</a>
+                    <a href="#api">API Reference</a>
+                    <a href="#support">Support</a>
+                    <a href="#github">GitHub</a>
+                    <a href="#community">Community</a>
+                    <a href="#privacy">Privacy</a>
+                </div>
+                <div class="copyright">
+                    © 2024 WebRTS.org. Open source streaming technology for everyone.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initially hide elements and observe them
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Add subtle parallax effect to background circles
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const circles = document.querySelectorAll('.bg-circle');
+            
+            circles.forEach((circle, index) => {
+                const speed = 0.1 + (index * 0.05);
+                circle.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add dynamic stats counter animation
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            
+            stats.forEach(stat => {
+                const target = stat.textContent;
+                if (target.includes('ms')) {
+                    animateNumber(stat, 0, 100, 'ms', '<');
+                } else if (target.includes('%')) {
+                    animateNumber(stat, 0, 99.9, '%');
+                } else if (target.includes('M+')) {
+                    animateNumber(stat, 0, 1, 'M+');
+                } else if (target.includes('+')) {
+                    animateNumber(stat, 0, 150, '+');
+                }
+            });
+        }
+
+        function animateNumber(element, start, end, suffix = '', prefix = '') {
+            let current = start;
+            const increment = end / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.textContent = prefix + (suffix === 'M+' ? current.toFixed(0) : 
+                                              suffix === '%' ? current.toFixed(1) : 
+                                              Math.floor(current)) + suffix;
+            }, 40);
+        }
+
+        // Trigger stats animation when section comes into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
 </body>
 </html>
